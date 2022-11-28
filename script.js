@@ -12,12 +12,16 @@
     -cart som listan på huvudsidan, men endast med det som lagts i cart
     -eventuella rabatter
     -input rabattkod --> icke-funktionell
+    -leveranskostnadsberäkning: procent och 25kr/gratis leverans
     -totalpris för produkter, leveranskostnader och slutpris
     -till-kassan-knapp som expanderar fönstret
     -namn och adress-uppgifter --> valideras (att de är ifyllda eller faktiskt korrekt?)
-    -välj betalningssätt kort/faktura med input för
+    -välj betalningssätt kort/faktura, beroende på val av alternativ med input för
         -kortuppgifter eller --> ingen validering
         -personnummer --> valideras
+    -Checkbox för godkännande av behandling av personuppgifter
+    -Checkbox för beställning av nyhetsbrev (ska vara iklickad som default)
+    -ta-bort-beställning-knapp som rensar all ifylld/klickad data
     -betala-knapp som expanderar fönstret
     -orderbekräftelse som listar beställning och leveranstid
 -tid- och mängdrelaterade avvikelser i pris
