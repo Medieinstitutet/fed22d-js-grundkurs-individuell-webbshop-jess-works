@@ -49,6 +49,32 @@ for(let i = 0; i < donutNames.length; i++) {
     const donutTextNode = document.createTextNode(donutName);
     donutNode.appendChild(donutTextNode);
     donutShop.appendChild(donutNode);
-
 }
 
+//loopar arrays/ +/- bar i väntan på att kunna hänga dem på varandra
+
+const donutPrices = ['18 kr', '20 kr', '20 kr', '35 kr', '20 kr', '18 kr', '23 kr', '18 kr', '18 kr', '35 kr'];
+
+for(let i = 0; i < donutPrices.length; i++) {
+    const donutPrice = donutPrices[i];
+    const donutPriceNode = document.createElement('li');
+    const donutPriceTextNode = document.createTextNode(donutPrice);
+    donutPriceNode.appendChild(donutPriceTextNode);
+    donutShop.appendChild(donutPriceNode);
+}
+
+// +/- bar --> häng på varje produktsort
+
+const minus = document.querySelector('#subtract');
+const plus = document.querySelector('#add');
+const currentCount = document.querySelector('#current-count');
+
+minus.addEventListener('click', subtract);
+plus.addEventListener('click', add);
+
+function subtract() {
+    currentCount.value -= 1;
+}
+function add() {
+    currentCount.value = Number(currentCount.value) + 1;
+}
