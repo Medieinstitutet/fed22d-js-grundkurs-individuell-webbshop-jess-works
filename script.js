@@ -14,7 +14,6 @@
     -input rabattkod --> icke-funktionell
     -leveranskostnadsberäkning: procent och 25kr/gratis leverans
     -totalpris för produkter, leveranskostnader och slutpris
-    -till-kassan-knapp som expanderar fönstret
     -namn och adress-uppgifter --> valideras (att de är ifyllda eller faktiskt korrekt?)
     -välj betalningssätt kort/faktura, beroende på val av alternativ med input för
         -kortuppgifter eller --> ingen validering
@@ -22,7 +21,7 @@
     -Checkbox för godkännande av behandling av personuppgifter
     -Checkbox för beställning av nyhetsbrev (ska vara iklickad som default)
     -ta-bort-beställning-knapp som rensar all ifylld/klickad data
-    -betala-knapp som expanderar fönstret
+    -betala-knapp 
     -orderbekräftelse som listar beställning och leveranstid
 -tid- och mängdrelaterade avvikelser i pris
     -måndag morgon rabatt
@@ -36,3 +35,20 @@
     -köp 800+ kr endast med kort
         -fakturavalet gråas ut och är disabled
     */
+
+/*const productList= document.getElementById(product-list);*/
+
+const donutShop = document.querySelector('#donut-shop');
+
+const donutNames = ['Coffee with Cooper', 'Cherry Pie', 'Hawaiian Punch', 'Twinset', 'Maple Syrup', 
+'Black & White', 'One Eyed Jack`s', 'Sitka', 'Snoqualmie', 'Twin Peaks'];
+
+for(let i = 0; i < donutNames.length; i++) {
+    const donutName = donutNames[i];
+    const donutNode = document.createElement('li');
+    const donutTextNode = document.createTextNode(donutName);
+    donutNode.appendChild(donutTextNode);
+    donutShop.appendChild(donutNode);
+
+}
+
