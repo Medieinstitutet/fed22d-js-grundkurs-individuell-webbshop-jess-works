@@ -35,46 +35,27 @@
     -köp 800+ kr endast med kort
         -fakturavalet gråas ut och är disabled
     */
+   
+const decBtns = document.querySelectorAll('button[data-operator="minus"]');
+const incBtns = document.querySelectorAll('button[data-operator="plus"]');
 
-/*const productList= document.getElementById(product-list);*/
-
-const donutShop = document.querySelector('#donut-shop');
-
-const donutNames = ['Coffee with Cooper', 'Cherry Pie', 'Hawaiian Punch', 'Twinset', 'Maple Syrup', 
-'Black & White', 'One Eyed Jack`s', 'Sitka', 'Snoqualmie', 'Twin Peaks'];
-
-for(let i = 0; i < donutNames.length; i++) {
-    const donutName = donutNames[i];
-    const donutNode = document.createElement('li');
-    const donutTextNode = document.createTextNode(donutName);
-    donutNode.appendChild(donutTextNode);
-    donutShop.appendChild(donutNode);
+for (let i = 0; i < decBtns.length; i++) {
+    decBtns[i].addEventListener('click', decreaseCount);
+    incBtns[i].addEventListener('click', increaseCount);
 }
 
-//loopar arrays/ +/- bar i väntan på att kunna hänga dem på varandra
+function decreaseCount(e) {
+    const amountEl = e.currentTarget.parentElement.querySelector('.amount');
 
-const donutPrices = ['18 kr', '20 kr', '20 kr', '35 kr', '20 kr', '18 kr', '23 kr', '18 kr', '18 kr', '35 kr'];
+    let amount = amountEl.innerText;
 
-for(let i = 0; i < donutPrices.length; i++) {
-    const donutPrice = donutPrices[i];
-    const donutPriceNode = document.createElement('li');
-    const donutPriceTextNode = document.createTextNode(donutPrice);
-    donutPriceNode.appendChild(donutPriceTextNode);
-    donutShop.appendChild(donutPriceNode);
+    amountEl.innerHTML = amount - 1;
 }
 
-// +/- bar --> häng på varje produktsort
-
-const minus = document.querySelector('#subtract');
-const plus = document.querySelector('#add');
-const currentCount = document.querySelector('#current-count');
-
-minus.addEventListener('click', subtract);
-plus.addEventListener('click', add);
-
-function subtract() {
-    currentCount.value -= 1;
-}
-function add() {
-    currentCount.value = Number(currentCount.value) + 1;
-}
+function increaseCount(e) {
+    const amountEl = e.currentTarget.parentElement.querySelector('.amount');
+        
+    let amount = Number(amountEl.innerText);
+        
+        amountEl.innerHTML = amount + 1;
+    }
