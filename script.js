@@ -35,7 +35,9 @@
     -köp 800+ kr endast med kort
         -fakturavalet gråas ut och är disabled
     */
-   
+
+// +/- donuts
+
 const decBtns = document.querySelectorAll('button[data-operator="minus"]');
 const incBtns = document.querySelectorAll('button[data-operator="plus"]');
 
@@ -49,7 +51,13 @@ function decreaseCount(e) {
 
     let amount = amountEl.innerText;
 
+    if (amount - 1 < 0) {
+        return;
+    }
+
     amountEl.innerHTML = amount - 1;
+
+    updateDonutSum(e.currentTarget.parentElement);
 }
 
 function increaseCount(e) {
@@ -58,4 +66,14 @@ function increaseCount(e) {
     let amount = Number(amountEl.innerText);
         
         amountEl.innerHTML = amount + 1;
+
+        updateDonutSum(e.currentTarget.parentElement);
+    }
+
+    function updateDonutSum(donutElement) {
+        const donutSinglePrice = donutElement.querySelector('.price').innerHTML;
+        const orederedAmount = donutElement.querySelector('.amount').innerHTML;
+        const sum = donutSinglePrice * orederedAmount;
+         
+        donutElement.querySelector('.sum').innerHTML = sum + ' kr';
     }
