@@ -36,7 +36,7 @@
         -fakturavalet gråas ut och är disabled
     */
 
-// +/- donuts
+// +/- donuts, show amount, calculate sum
 
 const decBtns = document.querySelectorAll('button[data-operator="minus"]');
 const incBtns = document.querySelectorAll('button[data-operator="plus"]');
@@ -75,5 +75,45 @@ function increaseCount(e) {
         const orederedAmount = donutElement.querySelector('.amount').innerHTML;
         const sum = donutSinglePrice * orederedAmount;
          
-        donutElement.querySelector('.sum').innerHTML = sum + ' kr';
+        donutElement.querySelector('.sum').innerHTML = sum;
     }
+
+//toggle shop and cart
+
+//import './main.css'; ? vart ska den ligga
+
+const shop = document.querySelector('#shop');
+const order = document.querySelector('#order');
+const cartBtn = document. querySelector('#cartBtn');
+const closeCartBtn = document.querySelector('#closeCartBtn');
+
+cartBtn.addEventListener('click', showCart);
+closeCartBtn.addEventListener('click', hideCart);
+
+
+function showCart() {
+    order.classList.remove('hidden');
+}
+
+function hideCart() {
+    order.classList.add('hidden'); 
+}
+
+// validation of order form details
+
+const firstName = document.querySelector('#firstName');
+const lastName = document.querySelector('#lastName');
+const street = document.querySelector('#street');
+const postalCode = document.querySelector('#postalCode');
+const city = document.querySelector('#city');
+const phone = document.querySelector('#phone');
+const email = document.querySelector('#email');
+const cardName = document.querySelector('#cardName');
+const cardNumber = document.querySelector('#cardNumber');
+const cardExpiry = document.querySelector('#cardxpiry');
+const cardCvc = document.querySelector('#cardCvc');
+const niNumber = document.querySelector('#niNumber');
+const checkboxGdpr = document.querySelector('#checkboxGdpr');
+const checkboxNewsletter = document.querySelector('#checkboxNewsletter');
+
+
