@@ -12,63 +12,17 @@
     <header>
         <img src="" alt="Dale & the Donuts logotype">
         <h1>Dale & the Donuts</h1>
-        <button class="material-symbols-outlined" id="filter-btn">
+        <button class="material-symbols-outlined" id="filterBtn">
             filter_list
         </button>
-        <button class="material-symbols-outlined" id="cart-btn">
+        <button class="material-symbols-outlined" id="cartBtn">
             shopping_cart
         </button>
     </header>
 
-    <div id="order">
-        <button id="close-cart-btn">Stäng varukorg</button>
-        <div id="cart">
-            <!--donuts added to cart, discounts, delivery costs-->
-        </div>
-        <div id="name-address">
-            <label>
-                Förnamn:
-                <input type="text" id="first-name">
-            </label>
-            <label>
-                Efternamn:
-                <input type="text" id="last-name">
-            </label>
-            <label>
-                Gatuadress:
-                <input type="text" id="street">
-            </label>
-            <label>
-                Postnummer:
-                <input type="number" id="postal-code">
-            </label>
-            <label>
-                Postort:
-                <input type="text" id="city">
-            </label>
-            <label>
-                Telefon (mobil):
-                <input type="number" id="phone">
-            </label>
-            E-postadress:
-            <input type="email" id="email">
-        </div>
-        <div id="delivery-options">
-            <form>
-                <input type="radio">
-                <label id="pay-card">kort</label>
-                <!--kortnr, expire, cvc-->
-                <input type="radio">
-                <label id="pay-invoice">faktura</label>
-                <!--personnummer-->
-            </form>
-        </div>
-        <button id="purchase">
-            Betala
-        </button>
-    </div>
+   
 
-    <div id="shop">
+    <div id="shop" >
         <button class="material-symbols-outlined">
             delete
         </button>
@@ -171,6 +125,81 @@
             <span class="amount">0</span> st
             <span class="sum">0</span> kr
         </article>
+    </div>
+
+    <div class="hidden" id="order">
+        <button id="closeCartBtn">Stäng varukorg</button>
+        
+        <div id="cart">
+            <!--donuts added to cart, discounts, delivery costs-->
+        </div>
+        <div id="nameAddress">
+            <label>
+                Förnamn:
+                <input type="text" id="firstName">
+            </label>
+            <label>
+                Efternamn:
+                <input type="text" id="lastName">
+            </label>
+            <label>
+                Gatuadress:
+                <input type="text" id="street">
+            </label>
+            <label>
+                Postnummer:
+                <input type="number" id="postalCode">
+            </label>
+            <label>
+                Postort:
+                <input type="text" id="city">
+            </label>
+            <label>
+                Telefon (mobil):
+                <input type="number" id="phone">
+            </label>
+            E-postadress:
+            <input type="email" id="email">
+        </div>
+        
+        <div id="deliveryOptions">
+            <form>
+                <input type="radio" id="payCard">
+                <label>kort</label>
+                <span id="cardDetails">
+                    <label>
+                        Kortinnehavarens namn
+                        <input type="text" id="cardName">
+                    </label>
+                    <label>
+                        Kortnummer
+                        <input type="number" id="cardNumber">
+                    </label>
+                    <label>
+                        Kortets giltighetstid
+                        <input type="number" id="cardExpiry">
+                    </label>
+                    <label>
+                        cvc
+                        <input type="number" id="cardCvc">
+                    </label>
+                </span>
+                <input type="radio" id="payInvoice">
+                <label>faktura</label>
+                <label>
+                    Personnummer
+                    <input type="number" id="niNumber">
+                </label>
+                <input type="checkbox" id="checkboxGdpr">
+                <label>Jag har läst och förstår T&C och privacy policy</label>
+                <input type="checkbox" id="checkboxNewsletter">
+                <label>Jag vill få nyhetsbrev med goda erbjudanden från Dale & the Donuts.</label>
+            </form>
+        </div>
+        
+        <button id="purchase">
+            Betala
+        </button>
     </div>
 
     <script src="script.js"></script>
