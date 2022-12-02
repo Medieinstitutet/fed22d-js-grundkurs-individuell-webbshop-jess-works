@@ -70,13 +70,13 @@ function increaseCount(e) {
         updateDonutSum(e.currentTarget.parentElement);
     }
 
-    function updateDonutSum(donutElement) {
-        const donutSinglePrice = donutElement.querySelector('.price').innerHTML;
-        const orederedAmount = donutElement.querySelector('.amount').innerHTML;
-        const sum = donutSinglePrice * orederedAmount;
+function updateDonutSum(donutElement) {
+    const donutSinglePrice = donutElement.querySelector('.price').innerHTML;
+    const orderedAmount = donutElement.querySelector('.amount').innerHTML;
+    const sum = donutSinglePrice * orderedAmount;
          
-        donutElement.querySelector('.sum').innerHTML = sum;
-    }
+    donutElement.querySelector('.sum').innerHTML = sum;
+}
 
 //toggle shop and cart
 
@@ -110,10 +110,204 @@ const phone = document.querySelector('#phone');
 const email = document.querySelector('#email');
 const cardName = document.querySelector('#cardName');
 const cardNumber = document.querySelector('#cardNumber');
-const cardExpiry = document.querySelector('#cardxpiry');
+const cardExpiry = document.querySelector('#cardExpiry');
 const cardCvc = document.querySelector('#cardCvc');
 const niNumber = document.querySelector('#niNumber');
 const checkboxGdpr = document.querySelector('#checkboxGdpr');
 const checkboxNewsletter = document.querySelector('#checkboxNewsletter');
+const purchaseBtn = document.querySelector('#purchaseBtn');
 
+// indexOf()    A-Z/0-9/@ ?
+let firstNameIsOk = false;
+
+firstNameField.addEventListener('change', checkFirstName);
+
+function checkFirstName() { 
+    if(firstNameField.value.indexOf("")) {   
+        firstNameIsOk = true;
+    } else {
+        firstNameIsOk = false;
+        wrongFirstName.textContent = 'Fyll i ditt förnamn.';
+    }
+    activatePurchaseBtn();
+}
+
+
+let lastNameIsOk = false;
+
+lastNameField.addEventListener('change', checkLastName);
+
+function checkLastName() { 
+    if(lastNameField.value.indexOf("")) {   
+        lastNameIsOk = true;
+    } else {
+        lastNameIsOk = false;
+        wrongLastName.textContent = 'Fyll i ditt efternamn.';
+    }
+    activatePurchaseBtn();
+}
+
+
+let streetIsOk = false;
+
+streetField.addEventListener('change', checkStreet);
+
+function checkStreet() { 
+    if(streetField.value.indexOf("")) {  
+        streetIsOk = true;
+    } else {
+        streetIsOk = false;
+        wrongStreet.textContent = 'Fyll i din gatuadress.';
+    }
+    activatePurchaseBtn();
+}
+
+
+let postalCodeIsOk = false;
+
+postalCodeField.addEventListener('change', checkPostalCode);
+
+function checkPostalCode() { 
+    if(postalCodeField.value.indexOf("")) {   
+        postalCodeIsOk = true;
+    } else {
+        postalCodeIsOk = false;
+        wrongPostalCode.textContent = 'Fyll i ditt postnummer.';
+    }
+    activatePurchaseBtn();
+}
+
+
+let cityIsOk = false;
+
+cityField.addEventListener('change', checkCity);
+
+function checkCity() { 
+    if(cityField.value.indexOf("")) {   //tänk på saken
+        cityIsOk = true;
+    } else {
+        cityIsOk = false;
+        wrongCity.textContent = 'Fyll i din postort.';
+    }
+    activatePurchaseBtn();
+}
+
+
+let phoneIsOk = false;
+
+phoneField.addEventListener('change', checkPhone);
+
+function checkPhone() { 
+    if(phoneField.value.indexOf("")) {   
+        phoneIsOk = true;
+    } else {
+        phoneIsOk = false;
+        wrongPhone.textContent = 'Fyll i ditt telefonnummer.';
+    }
+    activatePurchaseBtn();
+}
+
+
+let emailIsOk = false;
+
+emailField.addEventListener('change', checkEmail);
+
+function checkEmail() { 
+    if(emailField.value.indexOf("")) {   
+        emailIsOk = true;
+    } else {
+        emailIsOk = false;
+        wrongEmail.textContent = 'Fyll i din e-mailadress.';
+    }
+    activatePurchaseBtn();
+}
+
+
+let cardNameIsOk = false;   // !!! endast om kort är valt, ignorera annars, samma för faktura !!!
+
+cardNameField.addEventListener('change', checkCardName);
+
+function checkCardName() { 
+    if(cardNameField.value.indexOf(" ")) {   
+    } else {
+        cardNameIsOk = false;
+        wrongCardName.textContent = 'Fyll i kortinnehavarens namn.';
+    }
+    activatePurchaseBtn();
+}
+
+
+let cardNumberIsOk = false;
+
+cardNumberField.addEventListener('change', checkCardNumber);
+
+function checkCardNumber() { 
+    if(cardNumberField.value.indexOf("")) {   
+        cardNumberIsOk = true;
+    } else {
+        cardNumberIsOk = false;
+        wrongCardNumber.textContent = 'Fyll i ditt kortnummer.';
+    }
+    activatePurchaseBtn();
+}
+
+
+let expiryIsOk = false;
+
+expiryField.addEventListener('change', checkExpiry);
+
+function checkExpiry() { 
+    if(expiryField.value.indexOf("")) {   
+        expiryIsOk = true;
+    } else {
+        expiryIsOk = false;
+        wrongExpiry.textContent = 'Fyll i kortets giltighetstid.';
+    }
+    activatePurchaseBtn();
+}
+
+
+let cardCvcIsOk = false;
+
+cardCvcField.addEventListener('change', checkCardCvc);
+
+function checkCardCvc() { 
+    if(cardCvcField.value.indexOf("")) {   //tänk på saken
+        cardCvcIsOk = true;
+    } else {
+        cardCvcIsOk = false;
+        wrongCardCvc.textContent = 'Fyll i ditt cvc.';
+    }
+    activatePurchaseBtn();
+}
+
+
+let niNumberIsOk = false;
+
+niNumberField.addEventListener('change', checkNiNumber);
+
+function checkNiNumber() { 
+    if(niNumberField.value.indexOf("")) {  
+        niNumberIsOk = true;
+    } else {
+        niNumberIsOk = false;
+        wrongNiNumber.textContent = 'Fyll i ditt personnummer.';
+    }
+    activatePurchaseBtn();
+}
+
+
+// checkbox gdpr
+// checkbox nyhetsbrev
+
+
+function activatePurchaseBtn() {
+    if(&&) {
+        purchaseBtn.removeAttribute('disabled');
+        //orderbekräftelse
+
+    } else {
+        purchaseBtn.setAttribute('disable');
+    }
+}
 
