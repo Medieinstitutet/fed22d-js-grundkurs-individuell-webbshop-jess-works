@@ -80,7 +80,7 @@ function updateDonutSum(donutElement) {
 
 //toggle shop and cart
 
-//import './main.css'; ? vart ska den ligga
+//import './main.css'; //? vart ska den ligga
 
 const shop = document.querySelector('#shop');
 const order = document.querySelector('#order');
@@ -114,16 +114,38 @@ const cardExpiry = document.querySelector('#cardExpiry');
 const cardCvc = document.querySelector('#cardCvc');
 const niNumber = document.querySelector('#niNumber');
 const checkboxGdpr = document.querySelector('#checkboxGdpr');
-const checkboxNewsletter = document.querySelector('#checkboxNewsletter');
 const purchaseBtn = document.querySelector('#purchaseBtn');
 
-// indexOf()    A-Z/0-9/@ ?
 let firstNameIsOk = false;
+let lastNameIsOk = false;
+let streetIsOk = false;
+let postalCodeIsOk = false;
+let cityIsOk = false;
+let phoneIsOk = false;
+let emailIsOk = false;
+let cardNameIsOk = false;   // !!! endast om kort är valt, ignorera annars, samma för faktura !!!
+let cardNumberIsOk = false;
+let cardExpiryIsOk = false;
+let cardCvcIsOk = false;
+let niNumberIsOk = false;
+let checkboxGdprIsOk = false;
 
-firstNameField.addEventListener('change', checkFirstName);
+firstName.addEventListener('change', checkFirstName);
+lastName.addEventListener('change', checkLastName);
+street.addEventListener('change', checkStreet);
+postalCode.addEventListener('change', checkPostalCode);
+city.addEventListener('change', checkCity);
+phone.addEventListener('change', checkPhone);
+email.addEventListener('change', checkEmail);
+cardName.addEventListener('change', checkCardName);
+cardNumber.addEventListener('change', checkCardNumber);
+cardExpiry.addEventListener('change', checkCardExpiry);
+cardCvc.addEventListener('change', checkCardCvc);
+niNumber.addEventListener('change', checkNiNumber);
+checkboxGdpr.addEventListener('change', checkCheckboxGdpr);
 
 function checkFirstName() { 
-    if(firstNameField.value.indexOf("")) {   
+    if(firstName.value.length > 1) {   
         firstNameIsOk = true;
     } else {
         firstNameIsOk = false;
@@ -132,13 +154,8 @@ function checkFirstName() {
     activatePurchaseBtn();
 }
 
-
-let lastNameIsOk = false;
-
-lastNameField.addEventListener('change', checkLastName);
-
 function checkLastName() { 
-    if(lastNameField.value.indexOf("")) {   
+    if(lastName.value.length > 1) {   
         lastNameIsOk = true;
     } else {
         lastNameIsOk = false;
@@ -147,13 +164,8 @@ function checkLastName() {
     activatePurchaseBtn();
 }
 
-
-let streetIsOk = false;
-
-streetField.addEventListener('change', checkStreet);
-
 function checkStreet() { 
-    if(streetField.value.indexOf("")) {  
+    if(street.value.length > 1) {  
         streetIsOk = true;
     } else {
         streetIsOk = false;
@@ -162,13 +174,8 @@ function checkStreet() {
     activatePurchaseBtn();
 }
 
-
-let postalCodeIsOk = false;
-
-postalCodeField.addEventListener('change', checkPostalCode);
-
 function checkPostalCode() { 
-    if(postalCodeField.value.indexOf("")) {   
+    if(postalCode.value.length > 1) {   
         postalCodeIsOk = true;
     } else {
         postalCodeIsOk = false;
@@ -177,13 +184,8 @@ function checkPostalCode() {
     activatePurchaseBtn();
 }
 
-
-let cityIsOk = false;
-
-cityField.addEventListener('change', checkCity);
-
 function checkCity() { 
-    if(cityField.value.indexOf("")) {   //tänk på saken
+    if(city.value.length > 1) {  
         cityIsOk = true;
     } else {
         cityIsOk = false;
@@ -192,13 +194,8 @@ function checkCity() {
     activatePurchaseBtn();
 }
 
-
-let phoneIsOk = false;
-
-phoneField.addEventListener('change', checkPhone);
-
 function checkPhone() { 
-    if(phoneField.value.indexOf("")) {   
+    if(phone.value.length > 1) {   
         phoneIsOk = true;
     } else {
         phoneIsOk = false;
@@ -207,13 +204,8 @@ function checkPhone() {
     activatePurchaseBtn();
 }
 
-
-let emailIsOk = false;
-
-emailField.addEventListener('change', checkEmail);
-
-function checkEmail() { 
-    if(emailField.value.indexOf("")) {   
+function checkEmail() {     //varför kan jag inte validera @ --> email.value.indexOf("@")
+    if(email.value.length > 1) {   
         emailIsOk = true;
     } else {
         emailIsOk = false;
@@ -222,13 +214,8 @@ function checkEmail() {
     activatePurchaseBtn();
 }
 
-
-let cardNameIsOk = false;   // !!! endast om kort är valt, ignorera annars, samma för faktura !!!
-
-cardNameField.addEventListener('change', checkCardName);
-
 function checkCardName() { 
-    if(cardNameField.value.indexOf(" ")) {   
+    if(cardName.value.length > 1) {   
     } else {
         cardNameIsOk = false;
         wrongCardName.textContent = 'Fyll i kortinnehavarens namn.';
@@ -236,13 +223,8 @@ function checkCardName() {
     activatePurchaseBtn();
 }
 
-
-let cardNumberIsOk = false;
-
-cardNumberField.addEventListener('change', checkCardNumber);
-
 function checkCardNumber() { 
-    if(cardNumberField.value.indexOf("")) {   
+    if(cardNumber.value.length > 1) {   
         cardNumberIsOk = true;
     } else {
         cardNumberIsOk = false;
@@ -251,28 +233,18 @@ function checkCardNumber() {
     activatePurchaseBtn();
 }
 
-
-let expiryIsOk = false;
-
-expiryField.addEventListener('change', checkExpiry);
-
-function checkExpiry() { 
-    if(expiryField.value.indexOf("")) {   
-        expiryIsOk = true;
+function checkCardExpiry() { 
+    if(cardExpiry.value.length > 1) {   
+        cardExpiryIsOk = true;
     } else {
-        expiryIsOk = false;
-        wrongExpiry.textContent = 'Fyll i kortets giltighetstid.';
+        cardExpiryIsOk = false;
+        wrongCardExpiry.textContent = 'Fyll i kortets giltighetstid.';
     }
     activatePurchaseBtn();
 }
 
-
-let cardCvcIsOk = false;
-
-cardCvcField.addEventListener('change', checkCardCvc);
-
 function checkCardCvc() { 
-    if(cardCvcField.value.indexOf("")) {   //tänk på saken
+    if(cardCvc.value.length > 1) {   
         cardCvcIsOk = true;
     } else {
         cardCvcIsOk = false;
@@ -281,13 +253,8 @@ function checkCardCvc() {
     activatePurchaseBtn();
 }
 
-
-let niNumberIsOk = false;
-
-niNumberField.addEventListener('change', checkNiNumber);
-
-function checkNiNumber() { 
-    if(niNumberField.value.indexOf("")) {  
+function checkNiNumber() {  //  !!! validate for real niNumber !!!
+    if(niNumber.value.length > 1) {  
         niNumberIsOk = true;
     } else {
         niNumberIsOk = false;
@@ -296,18 +263,27 @@ function checkNiNumber() {
     activatePurchaseBtn();
 }
 
-
-// checkbox gdpr
-// checkbox nyhetsbrev
-
+function checkCheckboxGdpr() {
+    if(checkboxGdpr.checked) {
+        checkboxGdprIsOk = true;
+    } else {
+        checkboxGdprIsOk = false;
+        wrongCheckboxGdpr.textContent = 'Bekräfta att du läst och godkänner Dale & the Donuts T&C och privacy policy';
+    }
+}
 
 function activatePurchaseBtn() {
-    if(&&) {
+    if(firstNameIsOk && lastNameIsOk && streetIsOk && postalCodeIsOk && cityIsOk && 
+        phoneIsOk && emailIsOk && cardNameIsOk && cardNumberIsOk && cardExpiryIsOk && 
+        cardCvcIsOk && checkboxGdprIsOk) {   //cardPay
         purchaseBtn.removeAttribute('disabled');
         //orderbekräftelse
 
+    } else if (firstNameIsOk && lastNameIsOk && streetIsOk && postalCodeIsOk && cityIsOk && 
+        phoneIsOk && emailIsOk && niNumberIsOk && checkboxGdprIsOk) {  //invoicePay
+        purchaseBtn.removeAttribute('disabled');
     } else {
-        purchaseBtn.setAttribute('disable');
+        purchaseBtn.setAttribute('disabled');
     }
 }
 

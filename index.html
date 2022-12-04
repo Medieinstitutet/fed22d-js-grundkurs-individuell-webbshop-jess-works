@@ -23,7 +23,7 @@
    
 
     <div id="shop" >
-        <button class="material-symbols-outlined">
+        <button class="material-symbols-outlined" id="deleteBtn">
             delete
         </button>
         <article>
@@ -127,7 +127,7 @@
         </article>
     </div>
 
-    <div class="hidden" id="order">
+    <div id="order">    <!--class="hidden"-->
         <button id="closeCartBtn">Stäng varukorg</button>
         
         <div id="cart">
@@ -137,67 +137,82 @@
             <label>
                 Förnamn:
                 <input type="text" id="firstName">
-            </label>
+                <p id="wrongFirstName"></p>
+            </label><br>
             <label>
                 Efternamn:
                 <input type="text" id="lastName">
-            </label>
+                <p type="text" id="wrongLastName"></p>
+            </label><br>
             <label>
                 Gatuadress:
                 <input type="text" id="street">
-            </label>
+                <p type="text" id="wrongStreet"></p>
+            </label><br>
             <label>
                 Postnummer:
                 <input type="number" id="postalCode">
-            </label>
+                <p type="text" id="wrongPostalCode"></p>
+            </label><br>
             <label>
                 Postort:
                 <input type="text" id="city">
-            </label>
+                <p type="text" id="wrongCity"></p>
+            </label><br>
             <label>
                 Telefon (mobil):
                 <input type="number" id="phone">
-            </label>
+                <p type="text" id="wrongPhone"></p>
+            </label><br>
+            <label>
             E-postadress:
             <input type="email" id="email">
+            <p type="text" id="wrongEmail"></p>
+            </label><br>
         </div>
         
-        <div id="deliveryOptions">
+        <div id="paymentOptions">
             <form>
-                <input type="radio" id="payCard">
-                <label>kort</label>
+                <input type="radio" id="cardPay">
+                <label>Kort</label><br>
                 <span id="cardDetails">
                     <label>
                         Kortinnehavarens namn
                         <input type="text" id="cardName">
-                    </label>
+                        <p type="text" id="wrongCardName"></p>
+                    </label><br>
                     <label>
                         Kortnummer
                         <input type="number" id="cardNumber">
-                    </label>
+                        <p type="text" id="wrongCardNumber"></p>
+                    </label><br>
                     <label>
                         Kortets giltighetstid
                         <input type="number" id="cardExpiry">
-                    </label>
+                        <p type="text" id="wrongCardExpiry"></p>
+                    </label><br>
                     <label>
-                        cvc
+                        Cvc
                         <input type="number" id="cardCvc">
-                    </label>
+                        <p type="text" id="wrongCardCvc"></p>
+                    </label><br>
                 </span>
-                <input type="radio" id="payInvoice">
-                <label>faktura</label>
+                <input type="radio" id="invoicePay">
+                <label>Faktura</label><br>
                 <label>
                     Personnummer
                     <input type="number" id="niNumber">
-                </label>
+                    <p type="text" id="wrongNiNumber"></p>
+                </label><br>
                 <input type="checkbox" id="checkboxGdpr">
-                <label>Jag har läst och förstår T&C och privacy policy</label>
-                <input type="checkbox" id="checkboxNewsletter">
-                <label>Jag vill få nyhetsbrev med goda erbjudanden från Dale & the Donuts.</label>
+                <label>Jag har läst och godkänner Dale & the Donut's T&C och privacy policy.</label><br>
+                <p type="text" id="wrongCheckboxGdpr"></p>
+                <input type="checkbox" id="checkboxNewsletter" checked>
+                <label>Jag vill få nyhetsbrev med goda erbjudanden från Dale & the Donuts.</label><br>
             </form>
         </div>
         
-        <button id="purchase">
+        <button id="purchaseBtn" disabled>
             Betala
         </button>
     </div>

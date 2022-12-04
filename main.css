@@ -1,3 +1,7 @@
 h1 {
     display: inline;
 }
+
+.hidden {
+    opacity: 0;
+}
