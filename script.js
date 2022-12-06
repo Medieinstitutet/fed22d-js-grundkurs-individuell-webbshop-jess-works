@@ -1,49 +1,22 @@
-/*
--Header med logo, butiksnamn, cart och filter.
--'butiksinnehåll'
-    -10x img produkt, produktnamn, styckpris produkt
-    -bar för att öka/minska/visa antal produkter lagda i cart 
-    -totalpris för produkt i cart
-    -delete knapp som tar bort all produkt i cart
--när vara läggs i cart påas det med 'vara lagd i varukorg'
--filter med stigande pris/fallande pris/ta bort filter
--cart i popup eller som menyknappen i conditionals modulen
-    -stäng-knapp
-    -cart som listan på huvudsidan, men endast med det som lagts i cart
-    -eventuella rabatter
-    -input rabattkod --> icke-funktionell
-    -leveranskostnadsberäkning: procent och 25kr/gratis leverans
-    -totalpris för produkter, leveranskostnader och slutpris
-    -namn och adress-uppgifter --> valideras (att de är ifyllda eller faktiskt korrekt?)
-    -välj betalningssätt kort/faktura, beroende på val av alternativ med input för
-        -kortuppgifter eller --> ingen validering
-        -personnummer --> valideras
-    -Checkbox för godkännande av behandling av personuppgifter
-    -Checkbox för beställning av nyhetsbrev (ska vara iklickad som default)
-    -ta-bort-beställning-knapp som rensar all ifylld/klickad data
-    -betala-knapp 
-    -orderbekräftelse som listar beställning och leveranstid
--tid- och mängdrelaterade avvikelser i pris
-    -måndag morgon rabatt
-        -prisjustering och påas under header och högst upp i cart
-    -högre pris på nätter och helger
-        -priserna justeras, men påas inte
-    -10+ av samma produktsort rabatteras
-        -pris justeras och påas  i cart
-    -16+ produkter ger gratis leverans
-        -leveranskostnad tas bort och påas i cart
-    -köp 800+ kr endast med kort
-        -fakturavalet gråas ut och är disabled
-    */
-
-// +/- donuts, show amount, calculate sum
+// donuts: +/-, show amount, calculate sum, delete
 
 const decBtns = document.querySelectorAll('button[data-operator="minus"]');
 const incBtns = document.querySelectorAll('button[data-operator="plus"]');
+const deleteBtns = Array.from(document.querySelectorAll('button[class="material-symbols-outlined deleteBtn"]'));
+const price = Array.from(document.querySelectorAll('span[class="price"]'));
+const sum = Array.from(document.querySelectorAll('.sum'));
 
-for (let i = 0; i < decBtns.length; i++) {
+
+for (let i = 0; i < decBtns.length; i++) {  
     decBtns[i].addEventListener('click', decreaseCount);
+}
+
+for (let i = 0; i < incBtns.length; i++) {
     incBtns[i].addEventListener('click', increaseCount);
+}
+
+for (let i = 0; i < deleteBtns.length; i++) {
+    deleteBtns[i].addEventListener('click', resetCount);
 }
 
 function decreaseCount(e) {
@@ -65,10 +38,24 @@ function increaseCount(e) {
         
     let amount = Number(amountEl.innerText);
         
-        amountEl.innerHTML = amount + 1;
+    amountEl.innerHTML = amount + 1;
 
-        updateDonutSum(e.currentTarget.parentElement);
+    updateDonutSum(e.currentTarget.parentElement);
+}
+
+function resetCount(e) {
+    const amountEl = e.currentTarget.parentElement.querySelector('.amount');
+
+    let amount = amountEl.innerText;
+
+    if (amount - 1 < 0) {
+        return;
     }
+
+    amountEl.innerHTML = '0';
+
+    updateDonutSum(e.currentTarget.parentElement);
+}
 
 function updateDonutSum(donutElement) {
     const donutSinglePrice = donutElement.querySelector('.price').innerHTML;
@@ -78,9 +65,31 @@ function updateDonutSum(donutElement) {
     donutElement.querySelector('.sum').innerHTML = sum;
 }
 
-//toggle shop and cart
 
-//import './main.css'; //? vart ska den ligga
+price.sort((price1, price2) => price1 - price2);
+console.log(price[i]);
+
+//  sumTotal, discount, costDelivery, costTotal
+
+//function updateSumTotal() {
+   // const sumTotal = sum.reduce((a, b) => a.price + b.price, 0);
+    //console.log(sumTotal);
+
+   /* let sum = '0';
+
+    for (let i = 0; i < sum.length; i ++) {
+        sum += sum[i];
+    }
+    console.log(sum);
+    return sum;
+
+}*/
+
+
+
+/*toggle shop and cart
+
+//<link rel="stylesheet" href="main.css">
 
 const shop = document.querySelector('#shop');
 const order = document.querySelector('#order');
@@ -97,7 +106,8 @@ function showCart() {
 
 function hideCart() {
     order.classList.add('hidden'); 
-}
+}*/
+
 
 // validation of order form details
 
@@ -108,10 +118,6 @@ const postalCode = document.querySelector('#postalCode');
 const city = document.querySelector('#city');
 const phone = document.querySelector('#phone');
 const email = document.querySelector('#email');
-const cardName = document.querySelector('#cardName');
-const cardNumber = document.querySelector('#cardNumber');
-const cardExpiry = document.querySelector('#cardExpiry');
-const cardCvc = document.querySelector('#cardCvc');
 const niNumber = document.querySelector('#niNumber');
 const checkboxGdpr = document.querySelector('#checkboxGdpr');
 const purchaseBtn = document.querySelector('#purchaseBtn');
@@ -123,10 +129,6 @@ let postalCodeIsOk = false;
 let cityIsOk = false;
 let phoneIsOk = false;
 let emailIsOk = false;
-let cardNameIsOk = false;   // !!! endast om kort är valt, ignorera annars, samma för faktura !!!
-let cardNumberIsOk = false;
-let cardExpiryIsOk = false;
-let cardCvcIsOk = false;
 let niNumberIsOk = false;
 let checkboxGdprIsOk = false;
 
@@ -137,10 +139,6 @@ postalCode.addEventListener('change', checkPostalCode);
 city.addEventListener('change', checkCity);
 phone.addEventListener('change', checkPhone);
 email.addEventListener('change', checkEmail);
-cardName.addEventListener('change', checkCardName);
-cardNumber.addEventListener('change', checkCardNumber);
-cardExpiry.addEventListener('change', checkCardExpiry);
-cardCvc.addEventListener('change', checkCardCvc);
 niNumber.addEventListener('change', checkNiNumber);
 checkboxGdpr.addEventListener('change', checkCheckboxGdpr);
 
@@ -214,45 +212,6 @@ function checkEmail() {     //varför kan jag inte validera @ --> email.value.in
     activatePurchaseBtn();
 }
 
-function checkCardName() { 
-    if(cardName.value.length > 1) {   
-    } else {
-        cardNameIsOk = false;
-        wrongCardName.textContent = 'Fyll i kortinnehavarens namn.';
-    }
-    activatePurchaseBtn();
-}
-
-function checkCardNumber() { 
-    if(cardNumber.value.length > 1) {   
-        cardNumberIsOk = true;
-    } else {
-        cardNumberIsOk = false;
-        wrongCardNumber.textContent = 'Fyll i ditt kortnummer.';
-    }
-    activatePurchaseBtn();
-}
-
-function checkCardExpiry() { 
-    if(cardExpiry.value.length > 1) {   
-        cardExpiryIsOk = true;
-    } else {
-        cardExpiryIsOk = false;
-        wrongCardExpiry.textContent = 'Fyll i kortets giltighetstid.';
-    }
-    activatePurchaseBtn();
-}
-
-function checkCardCvc() { 
-    if(cardCvc.value.length > 1) {   
-        cardCvcIsOk = true;
-    } else {
-        cardCvcIsOk = false;
-        wrongCardCvc.textContent = 'Fyll i ditt cvc.';
-    }
-    activatePurchaseBtn();
-}
-
 function checkNiNumber() {  //  !!! validate for real niNumber !!!
     if(niNumber.value.length > 1) {  
         niNumberIsOk = true;
@@ -274,14 +233,14 @@ function checkCheckboxGdpr() {
 
 function activatePurchaseBtn() {
     if(firstNameIsOk && lastNameIsOk && streetIsOk && postalCodeIsOk && cityIsOk && 
-        phoneIsOk && emailIsOk && cardNameIsOk && cardNumberIsOk && cardExpiryIsOk && 
-        cardCvcIsOk && checkboxGdprIsOk) {   //cardPay
+        phoneIsOk && emailIsOk && checkboxGdprIsOk) {   //cardPay
         purchaseBtn.removeAttribute('disabled');
         //orderbekräftelse
 
     } else if (firstNameIsOk && lastNameIsOk && streetIsOk && postalCodeIsOk && cityIsOk && 
         phoneIsOk && emailIsOk && niNumberIsOk && checkboxGdprIsOk) {  //invoicePay
         purchaseBtn.removeAttribute('disabled');
+        //orderbekräftelse
     } else {
         purchaseBtn.setAttribute('disabled');
     }
