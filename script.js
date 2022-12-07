@@ -3,7 +3,20 @@
 const decBtns = document.querySelectorAll('button[data-operator="minus"]');
 const incBtns = document.querySelectorAll('button[data-operator="plus"]');
 const deleteBtns = Array.from(document.querySelectorAll('button[class="material-symbols-outlined deleteBtn"]'));
-const price = Array.from(document.querySelectorAll('span[class="price"]'));
+const priceItems = Array.from(document.querySelectorAll('span[class="price"]')); // Här skapas en array, men den plussas inte ihop med t.ex. "reduce-funktionen"
+
+/**
+ * Skapa en tom variabel, price, som är 0 från början.
+ * Loopa igenom varje <span>, och läs av texten inne i taggen
+ * Konvertera den till en siffra, annars funkar inte plus
+ * Plussa på föregående pris med nytt pris, för varje munk
+ */
+let price = 0;
+for (let i = 0; i < priceItems.length; i++) {
+    price += Number(priceItems[i].innerHTML);
+}
+console.log(price);
+
 const sum = Array.from(document.querySelectorAll('.sum'));
 
 
@@ -66,7 +79,7 @@ function updateDonutSum(donutElement) {
 }
 
 
-price.sort((price1, price2) => price1 - price2);
+priceItems.sort((price1, price2) => price1 - price2); // TODO: Samma här - nu försöker du sortera HTML-element, inte deras text-innehåll :)
 console.log(price[i]);
 
 //  sumTotal, discount, costDelivery, costTotal
