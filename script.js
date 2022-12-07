@@ -73,7 +73,7 @@ function resetCount(e) {
 function updateDonutSum(donutElement) {
     const donutSinglePrice = donutElement.querySelector('.price').innerHTML;
     const orderedAmount = donutElement.querySelector('.amount').innerHTML;
-    const sum = donutSinglePrice * orderedAmount;
+    const sum = donutSinglePrice * orderedAmount; // TODO: Gör om till siffror med hjälp av Number(), så fungerar beräkningarna bättre.
          
     donutElement.querySelector('.sum').innerHTML = sum;
 }
